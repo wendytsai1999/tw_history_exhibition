@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>臺灣日日新報</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* 載入動畫 */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #333;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #ffe6e6;
+            border: 1px solid #ff9999;
+            color: #cc0000;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        /* 標題 */
+        .header {
+            background: #222;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        /* 導航 */
+        .nav {
+            padding: 1rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 0.5rem 0;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .nav-tab.active {
+            border-bottom-color: #333;
+            font-weight: bold;
+        }
+
+        /* 區塊 */
+        .section {
+            margin-bottom: 3rem;
+            min-height: 200px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .view-all-btn {
+            padding: 0.3rem 0.8rem;
+            border: 1px solid #333;
+            background: white;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .view-all-btn:hover {
+            background: #333;
+            color: white;
+        }
+
+        /* 項目 */
+        .items {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .item {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: 3fr 7fr;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .item-image {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 120px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .item-date {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-category {
+            background: #f0f0f0;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-content {
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-content.collapsed {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .keywords {
+            color: #888;
+            font-size: 0.85rem;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .expand-btn {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 0.8rem;
+            padding: 0.2rem 0;
+        }
+
+        .expand-btn:hover {
+            color: #333;
+        }
+
+        .expand-btn::after {
+            content: ' ▼';
+            font-size: 0.7rem;
+            transition: transform 0.3s;
+        }
+
+        .expand-btn.expanded::after {
+            transform: rotate(180deg);
+        }
+
+        /* 標籤樣式 */
+        .item-tag {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: #666;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
+            border-radius: 2px;
+            z-index: 10;
+        }
+
+        /* 時間軸樣式 */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #333;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #333;
+        }
+
+        .timeline-year {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-left: 3px solid #333;
+            display: grid;
+            grid-template-columns: 2fr 8fr;
+            gap: 1rem;
+        }
+
+        .timeline-image {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 100px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* 彈出視窗 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            background: white;
+            border: 1px solid #ddd;
+            z-index: 1001;
+        }
+
+        .modal-header {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f8f8;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .modal-body {
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .modal-filters {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            background: #f8f8f8;
+        }
+
+        .filter-tag {
+            padding: 0.3rem 0.8rem;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .filter-tag.active {
+            background: #333;
+            color: white;
+        }
+
+        .modal-items {
+            padding: 1rem;
+        }
+
+        .modal-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: grid;
+            grid-template-columns: 2fr 8fr;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .modal-item:last-child {
+            border-bottom: none;
+        }
+
+        .modal-item .item-image {
+            min-height: 80px;
+            font-size: 0.8rem;
+        }
+
+        .modal-timeline {
+            padding: 1rem;
+        }
+
+        .modal-timeline .timeline {
+            padding-left: 3rem;
+        }
+
+        .modal-timeline .timeline-item {
+            margin-bottom: 3rem;
+        }
+
+        /* 手機版 */
+        @media (max-width: 768px) {
+            .item,
+            .modal-item {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: row;
+                gap: 0.5rem;
+                align-items: center;
+            }
+
+            .timeline {
+                padding-left: 1.5rem;
+            }
+
+            .timeline-item {
+                padding-left: 1.5rem;
+            }
+
+            .timeline-content {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-timeline .timeline {
+                padding-left: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>臺灣日日新報</h1>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-tabs">
+                <div class="nav-tab active" data-section="special-days">這一天的報紙</div>
+                <div class="nav-tab" data-section="advertisements">有趣的廣告</div>
+                <div class="nav-tab" data-section="constructions">重要建設</div>
+                <div class="nav-tab" data-section="daily-life">生活萬象</div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section id="special-days" class="section">
+            <div class="section-header">
+                <h2 class="section-title">這一天的報紙</h2>
+                <button class="view-all-btn" onclick="openModal('special-days')">more</button>
+            </div>
+            <div class="items" id="special-days-items">
+                <div class="loading">載入中...</div>
+            </div>
+        </section>
+
+        <section id="advertisements" class="section">
+            <div class="section-header">
+                <h2 class="section-title">有趣的廣告</h2>
+                <button class="view-all-btn" onclick="openModal('advertisements')">more</button>
+            </div>
+            <div class="items" id="advertisements-items">
+                <div class="loading">載入中...</div>
+            </div>
+        </section>
+
+        <section id="constructions" class="section">
+            <div class="section-header">
+                <h2 class="section-title">重要建設</h2>
+                <button class="view-all-btn" onclick="openModal('constructions')">more</button>
+            </div>
+            <div id="constructions-timeline">
+                <div class="loading">載入中...</div>
+            </div>
+        </section>
+
+        <section id="daily-life" class="section">
+            <div class="section-header">
+                <h2 class="section-title">生活萬象</h2>
+                <button class="view-all-btn" onclick="openModal('daily-life')">more</button>
+            </div>
+            <div class="items" id="daily-life-items">
+                <div class="loading">載入中...</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 彈出視窗 -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">查看全部</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-filters" id="modal-filters"></div>
+                <div class="modal-items" id="modal-items"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== 設定區域 - 你只需要修改這裡 =====
+        const CONFIG = {
+            // GitHub 資料庫 URL（請修改為正確的網址）
+            DATABASE_URL: 'https://raw.githubusercontent.com/wendytsai1999/exhibition-data/main/database.json',
+            
+            // 本地測試用的資料庫檔案（開發用）
+            LOCAL_DATABASE_URL: './database.json',
+            
+            // 是否使用本地檔案（設為 false 使用 GitHub）
+            USE_LOCAL: false
+        };
+
+        // ===== 核心變數 =====
+        let database = {};
+        let currentSection = '';
+        let currentFilter = '';
+
+        // ===== 資料載入功能 =====
+        async function loadDatabase() {
+            try {
+                showLoading(true);
+                
+                const url = CONFIG.USE_LOCAL ? CONFIG.LOCAL_DATABASE_URL : CONFIG.DATABASE_URL;
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                database = await response.json();
+                
+                initializePage();
+                showLoading(false);
+                
+            } catch (error) {
+                console.error('載入資料庫失敗:', error);
+                showError('載入資料失敗，請檢查網路連線或稍後再試。錯誤：' + error.message);
+                showLoading(false);
+            }
+        }
+
+        // 重新載入資料
+        async function refreshData() {
+            await loadDatabase();
+        }
+
+        // ===== 顯示控制功能 =====
+        function showLoading(show) {
+            const loadingElements = document.querySelectorAll('.loading');
+            loadingElements.forEach(el => {
+                el.style.display = show ? 'block' : 'none';
+            });
+        }
+
+        function showError(message) {
+            const sections = ['special-days', 'advertisements', 'daily-life'];
+            sections.forEach(sectionKey => {
+                const container = document.getElementById(`${sectionKey}-items`);
+                container.innerHTML = `<div class="error">${message}</div>`;
+            });
+            
+            const timelineContainer = document.getElementById('constructions-timeline');
+            timelineContainer.innerHTML = `<div class="error">${message}</div>`;
+        }
+
+        // ===== 頁面初始化 =====
+        function initializePage() {
+            if (!database || Object.keys(database).length === 0) {
+                showError('資料庫為空或格式錯誤');
+                return;
+            }
+
+            // 渲染各個區塊
+            Object.keys(database).forEach(sectionKey => {
+                if (sectionKey === 'constructions') {
+                    renderConstructionsTimeline();
+                } else {
+                    renderSectionItems(sectionKey);
+                }
+            });
+        }
+
+        // ===== 渲染功能 =====
+        // 渲染一般區塊項目（顯示最新兩筆）
+        function renderSectionItems(sectionKey) {
+            const section = database[sectionKey];
+            if (!section || !section.items) {
+                console.warn(`區塊 ${sectionKey} 沒有資料`);
+                return;
+            }
+
+            const container = document.getElementById(`${sectionKey}-items`);
+            
+            // 按發布時間排序，取最新兩筆
+            const latestItems = section.items
+                .sort((a, b) => new Date(b.publishTime) - new Date(a.publishTime))
+                .slice(0, 2);
+
+            if (latestItems.length === 0) {
+                container.innerHTML = '<div class="error">此區塊暫無資料</div>';
+                return;
+            }
+
+            container.innerHTML = latestItems.map(item => createItemHTML(item)).join('');
+        }
+
+        // 渲染重要建設時間軸（首頁版本）
+        function renderConstructionsTimeline() {
+            const section = database['constructions'];
+            if (!section || !section.items) {
+                console.warn('重要建設區塊沒有資料');
+                return;
+            }
+
+            const container = document.getElementById('constructions-timeline');
+            
+            // 按發布時間排序，取最新兩筆
+            const latestItems = section.items
+                .sort((a, b) => new Date(b.publishTime) - new Date(a.publishTime))
+                .slice(0, 2);
+
+            if (latestItems.length === 0) {
+                container.innerHTML = '<div class="error">此區塊暫無資料</div>';
+                return;
+            }
+
+            const timelineHTML = `
+                <div class="timeline">
+                    ${latestItems.map(item => `
+                        <div class="timeline-item">
+                            <div class="timeline-year">${item.year}</div>
+                            <div class="timeline-content">
+                                <div class="timeline-image">${item.imageText || item.title.substring(0, 10)}</div>
+                                <div class="timeline-content-wrapper">
+                                    <div class="item-date">${item.date}</div>
+                                    <div class="item-category">${item.category}</div>
+                                    <h3 class="item-title">${item.title}</h3>
+                                    <div class="item-content collapsed">
+                                        ${item.keywords ? `<div class="keywords">關鍵詞：${item.keywords}</div>` : ''}
+                                        ${item.content}
+                                    </div>
+                                    <button class="expand-btn" onclick="toggleExpand(this)">更多</button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            container.innerHTML = timelineHTML;
+        }
+
+        // 創建項目HTML
+        function createItemHTML(item) {
+            return `
+                <div class="item">
+                    ${item.tag ? `<div class="item-tag">${item.tag}</div>` : ''}
+                    <div class="item-image">${item.imageText || item.title.substring(0, 10)}</div>
+                    <div class="item-content-wrapper">
+                        <div class="item-date">${item.date}</div>
+                        <div class="item-category">${item.category}</div>
+                        <h3 class="item-title">${item.title}</h3>
+                        <div class="item-content collapsed">
+                            ${item.keywords ? `<div class="keywords">關鍵詞：${item.keywords}</div>` : ''}
+                            ${item.content}
+                        </div>
+                        <button class="expand-btn" onclick="toggleExpand(this)">更多</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ===== 互動功能 =====
+        // 展開/收起功能
+        function toggleExpand(button) {
+            const content = button.parentElement.querySelector('.item-content');
+            const isCollapsed = content.classList.contains('collapsed');
+            
+            if (isCollapsed) {
+                content.classList.remove('collapsed');
+                button.textContent = '收起';
+                button.classList.add('expanded');
+            } else {
+                content.classList.add('collapsed');
+                button.textContent = '更多';
+                button.classList.remove('expanded');
+            }
+        }
+
+        // ===== 彈出視窗功能 =====
+        function openModal(section) {
+            currentSection = section;
+            const data = database[section];
+            
+            if (!data) {
+                alert('此區塊暫無資料');
+                return;
+            }
+            
+            document.getElementById('modal-title').textContent = data.title;
+            
+            // 重要建設區塊：直接顯示完整時間軸，不需要篩選器
+            if (section === 'constructions') {
+                document.getElementById('modal-filters').style.display = 'none';
+                loadConstructionsFullTimeline();
+            } else {
+                // 其他區塊：設置篩選器
+                document.getElementById('modal-filters').style.display = 'flex';
+                setupModalFilters(data.filters);
+                currentFilter = data.filters[0];
+                loadModalItems();
+            }
+            
+            document.getElementById('modal-overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal-overlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // 設置彈出視窗篩選器
+        function setupModalFilters(filters) {
+            const filtersContainer = document.getElementById('modal-filters');
+            filtersContainer.innerHTML = '';
+            filters.forEach((filter, index) => {
+                const tag = document.createElement('div');
+                tag.className = `filter-tag ${index === 0 ? 'active' : ''}`;
+                tag.textContent = filter;
+                tag.onclick = () => filterModal(filter);
+                filtersContainer.appendChild(tag);
+            });
+        }
+
+        function filterModal(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-tag').forEach(tag => {
+                tag.classList.toggle('active', tag.textContent === filter);
+            });
+            loadModalItems();
+        }
+
+        // 載入重要建設完整時間軸
+        function loadConstructionsFullTimeline() {
+            const container = document.getElementById('modal-items');
+            const items = database['constructions'].items;
+            
+            if (items.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 2rem; color: #999;">暫無建設資料</div>';
+                return;
+            }
+
+            // 按年份排序顯示完整時間軸
+            const sortedItems = items.sort((a, b) => a.year - b.year);
+            
+            const timelineHTML = `
+                <div class="modal-timeline">
+                    <div class="timeline">
+                        ${sortedItems.map(item => `
+                            <div class="timeline-item">
+                                ${item.tag ? `<div class="item-tag">${item.tag}</div>` : ''}
+                                <div class="timeline-year">${item.year}</div>
+                                <div class="timeline-content">
+                                    <div class="timeline-image">${item.imageText || item.title.substring(0, 8)}</div>
+                                    <div class="timeline-content-wrapper">
+                                        <div class="item-date">${item.date}</div>
+                                        <div class="item-category">${item.category}</div>
+                                        <h3 class="item-title">${item.title}</h3>
+                                        <div class="item-content collapsed">
+                                            ${item.keywords ? `<div class="keywords">關鍵詞：${item.keywords}</div>` : ''}
+                                            ${item.content}
+                                        </div>
+                                        <button class="expand-btn" onclick="toggleExpand(this)">更多</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = timelineHTML;
+        }
+
+        // 載入一般彈出視窗項目
+        function loadModalItems() {
+            const container = document.getElementById('modal-items');
+            const data = database[currentSection];
+            
+            // 篩選符合當前分類的項目
+            const filteredItems = data.items.filter(item => item.category === currentFilter);
+            
+            container.innerHTML = '';
+            
+            if (filteredItems.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 2rem; color: #999;">此分類暫無更多內容</div>';
+                return;
+            }
+
+            // 按發布時間排序
+            const sortedItems = filteredItems.sort((a, b) => new Date(b.publishTime) - new Date(a.publishTime));
+            
+            sortedItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'modal-item';
+                div.innerHTML = `
+                    ${item.tag ? `<div class="item-tag">${item.tag}</div>` : ''}
+                    <div class="item-image">${item.imageText || item.title.substring(0, 8)}</div>
+                    <div class="item-content-wrapper">
+                        <div class="item-date">${item.date}</div>
+                        <div class="item-category">${item.category}</div>
+                        <h3 class="item-title">${item.title}</h3>
+                        <div class="item-content collapsed">
+                            ${item.keywords ? `<div class="keywords">關鍵詞：${item.keywords}</div>` : ''}
+                            ${item.content}
+                        </div>
+                        <button class="expand-btn" onclick="toggleExpand(this)">更多</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // ===== 事件監聽器 =====
+        // 頁籤切換功能
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById(this.dataset.section).scrollIntoView({ 
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 彈出視窗事件監聽
+        document.getElementById('modal-overlay').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // ===== 頁面載入時初始化 =====
+        document.addEventListener('DOMContentLoaded', loadDatabase);
+    </script>
+</body>
+</html>
