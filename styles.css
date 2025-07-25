@@ -112,9 +112,9 @@ body {
     text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
     animation: fadeInUp 1s ease-out;
     line-height: 1.2;
-    font-family: 'Comic Sans MS', 'Marker Felt', '標楷體', cursive, sans-serif;
-    letter-spacing: 0.5px;
-    transform: rotate(-2deg);
+    font-family: system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.5px;
+    transform: none;
     display: inline-block;
 }
 
