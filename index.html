@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>臺灣日日新報</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="探索臺灣日日新報的歷史文獻，了解臺灣早期的節慶習俗、重要建設、生活萬象與有趣廣告">
+    <meta name="keywords" content="臺灣日日新報,歷史文獻,端午節,中秋節,建設,廣告,生活">
+</head>
+<body>
+    <!-- 動畫 Banner 區域 -->
+    <div class="banner-scene">
+        <div class="banner-background"></div>
+        <div class="banner-overlay"></div>
+        <div class="banner-content">
+            <h1 class="banner-title">臺灣日日新報</h1>
+        </div>
+        <div class="character">
+            <img src="https://storage.googleapis.com/studio-design-asset-files/projects/8dO8GRk5Wn/s-680x1080_a689b215-929a-4526-9e7a-27efa3580cf3.gif" alt="走路人物" loading="lazy">
+        </div>
+        <!-- 浮動導航按鈕 -->
+        <div class="floating-nav">
+            <button class="nav-button active" data-section="special-days">這一天的報紙</button>
+            <button class="nav-button" data-section="advertisements">有趣的廣告</button>
+            <button class="nav-button" data-section="constructions">重要建設</button>
+            <button class="nav-button" data-section="daily-life">生活萬象</button>
+        </div>
+    </div>
+
+    <main class="container">
+        <!-- 主要插圖區段 -->
+        <section class="illustration-section main-illustration">
+            <div class="illustration-container">
+                <div class="illustration-placeholder" data-illustration="main-banner">
+                    <div class="illustration-text">
+                        <h3>歷史的足跡</h3>
+                        <p>從報紙中窺見臺灣百年變遷</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 這一天的報紙 -->
+        <section id="special-days" class="section">
+            <div class="section-header">
+                <h2 class="section-title">這一天的報紙</h2>
+                <button class="view-all-btn" onclick="openModal('special-days')">more</button>
+            </div>
+            
+            <!-- 端午節區塊 -->
+            <div class="festival-section" id="dragon-boat-festival">
+                <div class="festival-section-header">
+                    <h3 class="festival-section-title">端午</h3>
+                </div>
+                
+                <!-- 年代時間軸與導航同排 -->
+                <div class="timeline-nav-row">
+                    <div class="year-timeline" id="dragon-boat-timeline">
+                        <!-- 動態生成 -->
+                    </div>
+                    <div class="festival-controls">
+                        <button class="carousel-nav carousel-prev" onclick="CarouselManager.prev('dragon-boat')">‹</button>
+                        <button class="carousel-nav carousel-next" onclick="CarouselManager.next('dragon-boat')">›</button>
+                    </div>
+                </div>
+                
+                <div class="festival-content" id="dragon-boat-content">
+                    <div class="loading">載入中...</div>
+                </div>
+            </div>
+            
+            <!-- 中秋節區塊 -->
+            <div class="festival-section" id="mid-autumn-festival">
+                <div class="festival-section-header">
+                    <h3 class="festival-section-title">中秋</h3>
+                </div>
+                
+                <!-- 年代時間軸與導航同排 -->
+                <div class="timeline-nav-row">
+                    <div class="year-timeline" id="mid-autumn-timeline">
+                        <!-- 動態生成 -->
+                    </div>
+                    <div class="festival-controls">
+                        <button class="carousel-nav carousel-prev" onclick="CarouselManager.prev('mid-autumn')">‹</button>
+                        <button class="carousel-nav carousel-next" onclick="CarouselManager.next('mid-autumn')">›</button>
+                    </div>
+                </div>
+                
+                <div class="festival-content" id="mid-autumn-content">
+                    <div class="loading">載入中...</div>
+                </div>
+            </div>
+            
+            <!-- 九一八事變區塊 -->
+            <div class="festival-section" id="sept-incident">
+                <div class="festival-section-header">
+                    <h3 class="festival-section-title">九一八事變</h3>
+                </div>
+                
+                <div class="festival-content" id="sept-incident-content">
+                    <div class="loading">載入中...</div>
+                </div>
+            </div>
+            
+            <!-- 隱藏的數據結構 -->
+            <div class="data-hidden">
+                <!-- 端午節輪播 -->
+                <div class="festival-data" data-category="傳統節日" data-type="carousel">
+                    <div class="festival-header">
+                        <h3 class="festival-title">端午</h3>
+                    </div>
+                    <div class="festival-years" data-years="1900,1910,1925,1930,1935">
+                        
+                        <div class="year-item" data-year="1900">
+                            <div class="item-date">(明治33) 1900-06-05</div>
+                            <div class="item-edition">日刊</div>
+                            <div class="item-page">01</div>
+                            <div class="item-category">節慶</div>
+                            <div class="item-tag"></div>
+                            <div class="item-title">端午瑣誌</div>
+                            <div class="item-content">
+                                台灣人會在端午節進行多項驅邪保平安的習俗。家家戶戶會在門口掛上艾草和榕樹枝，象徵避邪。<br><br>
+                                中午時分，人們會取井水或溪水保存，稱為「午時水」，相信具有淨化與保健的功效。<br><br>
+                                全家會一同飲用雄黃酒，為孩童驅毒避邪。大人與小孩也會佩戴香包等芳香飾品。
+                            </div>
+                            <div class="item-keywords"></div>
+                            <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%8E%E6%B2%BB33%29%201900-06-05_%E7%AB%AF%E5%8D%88%E7%91%A3%E8%AA%8C.png</div>
+                            <div class="item-image-text">端午瑣誌</div>
+                        </div>
+
+                        <div class="year-item" data-year="1910">
+                            <div class="item-date">(明治43) 1910-06-16</div>
+                            <div class="item-edition">日刊</div>
+                            <div class="item-page">04</div>
+                            <div class="item-category">節慶</div>
+                            <div class="item-tag"></div>
+                            <div class="item-title">嘉義通信／禁止擲石</div>
+                            <div class="item-content">
+                                早期，嘉義地區的端午節有聚眾擲石以驅瘟疫的風俗，原為民間信仰活動，但隨著時間推移，現場常演變為激烈衝突，甚至有人攜帶刀械，造成傷害。<br><br>
+                                地方官府認為這種風氣不良，決定加以取締。端午當日，警方帶領壯丁前往現場，嚴格彈壓並禁止此習俗的進行。
+                            </div>
+                            <div class="item-keywords"></div>
+                            <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%8E%E6%B2%BB43%29%201910-06-16_%E5%98%89%E7%BE%A9%E9%80%9A%E4%BF%A1%EF%BC%8F%E7%A6%81%E6%AD%A2%E6%93%B2%E7%9F%B3.png</div>
+                            <div class="item-image-text">嘉義通信／禁止擲石</div>
+                        </div>
+
+                        <div class="year-item" data-year="1925">
+                            <div class="item-date">(大正14) 1925-06-30</div>
+                            <div class="item-edition">夕刊</div>
+                            <div class="item-page">n04</div>
+                            <div class="item-category">節慶</div>
+                            <div class="item-tag"></div>
+                            <div class="item-title">新竹特訊／端午雜事</div>
+                            <div class="item-content">
+                                端午節當日，民眾清早插蒲懸艾、備粽香酒祭品前往廟宇行香或藥草湯浴。下午聖母遶境展開，沿途有花車與多支樂隊表演，吸引大批民眾圍觀，街道熱鬧擁擠。天后宮前並有戲劇演出，節慶氣氛熱烈。
+                            </div>
+                            <div class="item-keywords"></div>
+                            <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E5%A4%A7%E6%AD%A314%29%201925-06-30_%E6%96%B0%E7%AB%B9%E7%89%B9%E8%A8%8A%EF%BC%8F%E7%AB%AF%E5%8D%88%E9%9B%9C%E4%BA%8B.png</div>
+                            <div class="item-image-text">新竹特訊／端午雜事</div>
+                        </div>
+
+                        <div class="year-item" data-year="1930">
+                            <div class="item-date">(昭和5) 1930-06-03</div>
+                            <div class="item-edition">夕刊</div>
+                            <div class="item-page">n04</div>
+                            <div class="item-category">節慶</div>
+                            <div class="item-tag"></div>
+                            <div class="item-title">新竹西門商團祝舊端午　捉變裝搜寶</div>
+                            <div class="item-content">
+                                為慶祝端午節，新竹西門商圈於農曆五月五日舉辦「變裝捉人」與「尋寶」活動。參加變裝者共九人，並依表現分為十等給予獎勵，尋寶活動亦設有相同獎賞制度，場面熱鬧有趣。
+                            </div>
+                            <div class="item-keywords">陳承屋</div>
+                            <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%AD%E5%92%8C5%29%201930-06-03_%E6%96%B0%E7%AB%B9%E8%A5%BF%E9%96%80%E5%95%86%E5%9C%98%E7%A5%9D%E8%88%8A%E7%AB%AF%E5%8D%88%E3%80%80%E6%8D%89%E8%AE%8A%E8%A3%9D%E6%90%9C%E5%AF%B6.png</div>
+                            <div class="item-image-text">新竹西門商團祝舊端午　捉變裝搜寶</div>
+                        </div>
+
+                        <div class="year-item" data-year="1935">
+                            <div class="item-date">(昭和10) 1935-06-08</div>
+                            <div class="item-edition">夕刊</div>
+                            <div class="item-page">n04</div>
+                            <div class="item-category">節慶</div>
+                            <div class="item-tag"></div>
+                            <div class="item-title">大溪／古曆端午</div>
+                            <div class="item-content">
+                                大溪郡今年端午雖未舉行龍舟競賽，仍安排戲劇演出與詩會等活動，場面熱鬧。當日天氣晴朗，民眾踴躍至公園與戲院觀賞演出，午後「崁津吟社」舉辦七言律詩詩會，以「五日書懷」為題，作品經評選後由黃樹林先生頒發獎品，活動在熱烈氣氛中圓滿落幕。
+                            </div>
+                            <div class="item-keywords">黃樹林</div>
+                            <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%AD%E5%92%8C10%29%201935-06-08_%E5%A4%A7%E6%BA%AA%EF%BC%8F%E5%8F%A4%E6%9B%86%E7%AB%AF%E5%8D%88.png</div>
+                            <div class="item-image-text">大溪／古曆端午</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 中秋節輪播 -->
+                <div class="festival-data" data-category="傳統節日" data-type="carousel">
+                    <div class="festival-header">
+                        <h3 class="festival-title">中秋</h3>
+                    </div>
+                    <div class="festival-years" data-years="1900,1905,1910,1915,1920,1925,1930,1935,1940">
+                        
+                        <div class="year-item" data-year="1900">
+                            <div class="item-date">(明治33) 1900-09-12</div>
+                            <div class="item-edition">日刊</div>
+                            <div class="item-page">01</div>
+                            <div class="item-category">詩詞</div>
+                            <div class="item-tag"></div>
+                            <div class="item-title">中秋後一日。爲陽曆九月九日。與衣洲楂客及諸同人。約淡江泛月。作永夜之遊。乃楂客旣來。而諸人不至。時風雨迷離。姮娥懶出。相與躊躇中止。尋傾樽小酌。擬覓句聯詩。忽有俗客入談。遂罷興。卒成一律。以絕其事。</div>
+                            <div class="item-content">
+                                中秋節過後的重陽日，我原本與衣洲楂客和其他朋友相約到淡水河賞月泛舟，沒想到當天只有衣洲楂客前來，其他人都沒出現，天氣又風雨交加，連月亮也不見蹤影，只好取消行程。<br><br>
+                                改在室內小酌並準備作詩助興，卻被一位俗客打斷談話，詩興全無，最後勉強寫了一首詩作結。雖然聚會落空，幸好還有王郎相伴，讓人感到一絲慰藉。<br><br>
+                                衣洲楂客詩後感嘆，平日雖被瑣事纏身，但只要有知己相伴，即使平凡的一天，也能成為珍貴回憶，就像仙丹一粒也能點鐵成金，足見友情之可貴。
+                            </div>
+                            <div class="item-keywords"></div>
+                            <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%8E%E6%B2%BB33%29%201900-09-12_%E4%B8%AD%E7%A7%8B%E5%BE%8C%E4%B8%80%E6%97%A5%E3%80%82%E7%88%B2%E9%99%BD%E6%9B%86%E4%B9%9D%E6%9C%88%E4%B9%9D%E6%97%A5%E3%80%82%E8%88%87%E8%A1%A3%E6%B4%B2%E6%A5%82%E5%AE%A2%E5%8F%8A%E8%AB%B8%E5%90%8C%E4%BA%BA%E3%80%82.png</div>
+                            <div class="item-image-text">中秋後一日。爲陽曆九月九日。與衣洲楂客及諸同人。約淡江泛月。作永夜之遊。乃楂客旣來。而諸人不至。時風雨迷離。姮娥懶出。相與躊躇中止。尋傾樽小酌。擬覓句聯詩。忽有俗客入談。遂罷興。卒成一律。以絕其事。</div>
+                        </div>
+
+                        <div class="year-item" data-year="1905">
+                            <div class="item-date">(明治38) 1905-09-17</div>
+                            <div class="item-edition">日刊</div>
+                            <div class="item-page">05</div>
+                            <div class="item-category">節慶</div>
+                            <div class="item-tag"></div>
+                            <div class="item-title">中秋燈謎</div>
+                            <div class="item-content">
+                                台灣早期中秋節有文人相聚賞月作詩的傳統。臺北士林的潘大家每年都會在自宅「文魁第」舉辦詩會，今年雖遇陰雨無月，但仍張燈設座，舉行燈謎與吟詩活動，場面熱鬧。<br><br>
+                                燈謎由郭鏡蓉設計，他曾任報社漢文記者，當時為潘家家庭教師。來賓猜中謎題者可敲鼓示喜並獲贈獎品。<br><br>
+                                謎題內容多樣有趣，例如：「因好色而失明」對應四書語句「謂之瞽」；「太王去鄰」猜人名「伯夷」；「休戰不易」猜歐洲國名，答案是「荷蘭」等等。即使當晚無月，仍展現文人聚會的雅趣與創意。
+                            </div>
+                            <div class="item-keywords"></div>
+                            <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%8E%E6%B2%BB38%29%201905-09-17_%E4%B8%AD%E7%A7%8B%E7%87%88%E8%AC%8E.png</div>
+                            <div class="item-image-text">中秋燈謎</div>
+                        </div>
+
+                        <div class="year-item" data-year="1910">
+                            <div class="item-date">(明治43) 1910-09-21</div>
+                            <div class="item-edition">日刊</div>
+                            <div class="item-page">01</div>
+                            <div class="item-category">詩詞</div>
+                            <div class="item-tag"></div>
+                            <div class="item-title">中秋雅集卽事</div>
+                            <div class="item-content">
+                                詩人描寫中秋之夜與友人雅集賞月吟詩的喜悅，同時也流露出秋夜中對自身衰老與孤影的感傷情懷。
+                            </div>
+                            <div class="item-keywords"></div>
+                            <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%8E%E6%B2%BB43%29%201910-09-21_%E4%B8%AD%E7%A7%8B%E9%9B%85%E9%9B%86%E5%8D%BD%E4%BA%8B.png</div>
+                            <div class="item-image-text">中秋雅集卽事</div>
+                        </div>
+
+                        <div class="year-item" data-year="1915">
+                            <div class="item-date">(大正4) 1915-09-23</div>
+                            <div class="item-edition">日刊</div>
+                            <div class="item-page">01</div>
+                            <div class="item-category">經濟</div>
+                            <div class="item-tag"></div>
+                            <div class="item-title">對支輸出旺盛　中秋後の需要如何</div>
+                            <div class="item-content">
+                                歐洲戰爭爆發後，中國對歐出口幾乎停滯，購買力受影響。然而今年秋收良好，加上中秋臨近，帶動棉布、砂糖、雜貨等需求，使對中出口仍呈活絡態勢。<br><br>
+                                雖有悲觀聲音，但中國內需尚穩，兩湖地區亦無糧荒，預期中秋後商談仍將持續，對華出口不宜輕言悲觀。
+                            </div>
+                            <div class="item-keywords"></div>
+                            <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E5%A4%A7%E6%AD%A34%29%201915-09-23_%E5%B0%8D%E6%94%AF%E8%BC%B8%E5%87%BA%E6%97%BA%E7%9B%9B%E3%80%80%E4%B8%AD%E7%A7%8B%E5%BE%8C%E3%81%AE%E9%9C%80%E8%A6%81%E5%A6%82%E4%BD%95.png</div>
+                            <div class="item-image-text">對支輸出旺盛　中秋後の需要如何</div>
+                        </div>
+
+                        <div class="year-item" data-year="1920">
+                            <div class="item-date">(大正9) 1920-09-23</div>
+                            <div class="item-edition">日刊</div>
+                            <div class="item-page">06</div>
+                            <div class="item-category">節慶</div>
+                            <div class="item-tag"></div>
+                            <div class="item-title">新竹之中秋餅</div>
+                            <div class="item-content">
+                                新竹自清代以來即以製餅聞名，尤以中秋膏皮餅與花生粩等最具特色，至今仍勝於台北。當地如北門街的老味珍與錦香餅店，近年持續創新，力保竹塹餅的傳統聲譽。
+                            </div>
+                            <div class="item-keywords"></div>
+                            <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E5%A4%A7%E6%AD%A39%29%201920-09-23_%E6%96%B0%E7%AB%B9%E4%B9%8B%E4%B8%AD%E7%A7%8B%E9%A4%85.png</div>
+                            <div class="item-image-text">新竹之中秋餅</div>
+                        </div>
+
+                        <div class="year-item" data-year="1925">
+                            <div class="item-date">(大正14) 1925-10-03</div>
+                            <div class="item-edition">夕刊</div>
+                            <div class="item-page">n02</div>
+                            <div class="item-category">節慶</div>
+                            <div class="item-tag"></div>
+                            <div class="item-title">今宵中秋の明月</div>
+                            <div class="item-content">
+                                中秋佳節，皓月當空，民眾紛紛賞月慶祝，享受團圓之樂。
+                            </div>
+                            <div class="item-keywords"></div>
+                            <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E5%A4%A7%E6%AD%A314%29%201925-10-03_%E4%BB%8A%E5%AE%B5%E4%B8%AD%E7%A7%8B%E3%81%AE%E6%98%8E%E6%9C%88.png</div>
+                            <div class="item-image-text">今宵中秋の明月</div>
+                        </div>
+
+                        <div class="year-item" data-year="1930">
+                            <div class="item-date">(昭和5) 1930-10-08</div>
+                            <div class="item-edition">日刊</div>
+                            <div class="item-page">04</div>
+                            <div class="item-category">經濟</div>
+                            <div class="item-tag"></div>
+                            <div class="item-title">麻豆文旦價跌</div>
+                            <div class="item-content">
+                                麻豆文旦因景氣不佳、銷路受阻，價格大跌。中秋前原期待行情回升，卻一蹶不振，果農即使賤賣也難以售出，損失慘重。
+                            </div>
+                            <div class="item-keywords">曾文郡、中秋節</div>
+                            <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%AD%E5%92%8C5%29%201930-10-08_%E9%BA%BB%E8%B1%86%E6%96%87%E6%97%A6%E5%83%B9%E8%B7%8C.png</div>
+                            <div class="item-image-text">麻豆文旦價跌</div>
+                        </div>
+
+                        <div class="year-item" data-year="1935">
+                            <div class="item-date">(昭和10) 1935-09-11</div>
+                            <div class="item-edition">日刊</div>
+                            <div class="item-page">08</div>
+                            <div class="item-category">節慶</div>
+                            <div class="item-tag"></div>
+                            <div class="item-title">宜蘭／中秋佳節</div>
+                            <div class="item-content">
+                                宜蘭街為簡化中元開支，轉以中秋舉辦祭典與遊藝活動，十四至十六日在市內分四區設鞦韆與燈飾，其中西門區文昌宮與王廟尤具規模，有鞦韆、角力等餘興節目，預期中秋夜將熱鬧盛大。
+                            </div>
+                            <div class="item-keywords"></div>
+                            <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%AD%E5%92%8C10%29%201935-09-11_%E5%AE%9C%E8%98%AD%EF%BC%8F%E4%B8%AD%E7%A7%8B%E4%BD%B3%E7%AF%80.png</div>
+                            <div class="item-image-text">宜蘭／中秋佳節</div>
+                        </div>
+
+                        <div class="year-item" data-year="1940">
+                            <div class="item-date">(昭和15) 1940-09-08</div>
+                            <div class="item-edition">日刊</div>
+                            <div class="item-page">08</div>
+                            <div class="item-category">節慶</div>
+                            <div class="item-tag"></div>
+                            <div class="item-title">臺中秋競馬　第一日目</div>
+                            <div class="item-content">
+                                戰時物資管制，中秋節提台中中秋競馬於本月六日上午十時在大肚山競馬場舉行，當日風勢稍強但天氣晴朗，吸引大量觀眾到場。首日共舉辦四場比賽，各場比賽開出單勝、複勝與特配等賠率。
+                            </div>
+                            <div class="item-keywords"></div>
+                            <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%AD%E5%92%8C15%29%201940-09-08_%E8%87%BA%E4%B8%AD%E7%A7%8B%E7%AB%B6%E9%A6%AC%E3%80%80%E7%AC%AC%E4%B8%80%E6%97%A5%E7%9B%AE.png</div>
+                            <div class="item-image-text">臺中秋競馬　第一日目</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 九一八事變 (單一事件) -->
+                <div class="festival-data" data-category="歷史事件" data-type="single">
+                    <div class="festival-header">
+                        <h3 class="festival-title">九一八事變</h3>
+                    </div>
+                    <div class="single-event-data">
+                        <div class="item-date">(昭和6) 1931-09-18</div>
+                        <div class="item-edition">日刊</div>
+                        <div class="item-page">02</div>
+                        <div class="item-category">軍事</div>
+                        <div class="item-tag">重大事件</div>
+                        <div class="item-title">擧動怪しきものは　假借なく處分する　滿鐵沿線や附屬地で　本庄司令官から命令</div>
+                        <div class="item-content">
+                            因應滿鐵沿線賊亂頻傳，關東軍司令官本庄繁下令，對暴動與可疑行為者將嚴厲處置，以維護軍隊威信，並自17日起展開全線行軍演習以強化治安。
+                        </div>
+                        <div class="item-keywords"></div>
+                        <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%AD%E5%92%8C6%29%201931-09-18_%E6%93%A7%E5%8B%95%E6%80%AA%E3%81%97%E3%81%8D%E3%82%82%E3%81%AE%E3%81%AF%E3%80%80%E5%81%87%E5%80%9F%E3%81%AA%E3%81%8F%E8%99%95%E5%88%86%E3%81%99%E3%82%8B%E3%80%80%E6%BB%BF%E9%90%B5%E6%B2%BF%E7%B7%9A%E3%82%84%E9%99%84%E5%B1%AC%E5%9C%B0%E3%81%A7%E3%80%80%E6%9C%AC%E5%BA%84%E5%8F%B8%E4%BB%A4%E5%AE%98%E3%81%8B%E3%82%89%E5%91%BD%E4%BB%A4.png</div>
+                        <div class="item-image-text">擧動怪しきものは　假借なく處分する　滿鐵沿線や附屬地で　本庄司令官から命令</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 分隔插圖 -->
+        <section class="illustration-section divider-illustration">
+            <div class="illustration-container">
+                <div class="illustration-placeholder small-illustration" data-illustration="newspaper-stack">
+                    <div class="illustration-text">
+                        <p>翻閱歷史的廣告頁</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 有趣的廣告 -->
+        <section id="advertisements" class="section">
+            <div class="section-header">
+                <h2 class="section-title">有趣的廣告</h2>
+                <button class="view-all-btn" onclick="openModal('advertisements')">more</button>
+            </div>
+            
+            <div id="advertisements-items">
+                <div class="loading">載入中...</div>
+            </div>
+            
+            <div class="data-hidden">
+                <div class="ad-item" data-category="民生用品">
+                    <div class="item-date">(大正14) 1925-04-10</div>
+                    <div class="item-edition">日刊</div>
+                    <div class="item-page">04</div>
+                    <div class="item-category">民生用品</div>
+                    <div class="item-tag"></div>
+                    <div class="item-title">味の素</div>
+                    <div class="item-content">
+                        1908年，日本池田菊苗博士研發「味の素」，各地銷售後，發現中式料理最對味。
+                    </div>
+                    <div class="item-keywords"></div>
+                    <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E5%A4%A7%E6%AD%A314%29%201925-04-10_%E5%91%B3%E7%B4%A0.png</div>
+                    <div class="item-image-text">味の素</div>
+                </div>
+
+                <div class="ad-item" data-category="民生用品">
+                    <div class="item-date">(大正9) 1920-11-10</div>
+                    <div class="item-edition">日刊</div>
+                    <div class="item-page">01</div>
+                    <div class="item-category">民生用品</div>
+                    <div class="item-tag"></div>
+                    <div class="item-title">味の素</div>
+                    <div class="item-content">
+                        日常品？奢侈品？
+                    </div>
+                    <div class="item-keywords"></div>
+                    <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E5%A4%A7%E6%AD%A39%29%201920-11-10_%E5%91%B3%E7%B4%A0.png</div>
+                    <div class="item-image-text">味の素</div>
+                </div>
+
+                <div class="ad-item" data-category="汽車">
+                    <div class="item-date">(昭和2) 1927-11-19</div>
+                    <div class="item-edition">日刊</div>
+                    <div class="item-page">06</div>
+                    <div class="item-category">汽車</div>
+                    <div class="item-tag"></div>
+                    <div class="item-title">別克汽車</div>
+                    <div class="item-content">
+                        通用汽車是源自美國的跨國公司，擁有別克、雪佛蘭、凱迪拉克等廠牌。
+                    </div>
+                    <div class="item-keywords"></div>
+                    <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%AD%E5%92%8C2%29%201927-11-19_%E6%B1%BD%E8%BB%8A.png</div>
+                    <div class="item-image-text">別克汽車</div>
+                </div>
+
+                <div class="ad-item" data-category="藥品">
+                    <div class="item-date">(大正9) 1920-12-30</div>
+                    <div class="item-edition">日刊</div>
+                    <div class="item-page">01</div>
+                    <div class="item-category">藥品</div>
+                    <div class="item-tag"></div>
+                    <div class="item-title">中將湯</div>
+                    <div class="item-content">
+                        中將湯不是婦女的專利，原來它也能治流感？！
+                    </div>
+                    <div class="item-keywords"></div>
+                    <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E5%A4%A7%E6%AD%A39%29%201920-12-30_%E4%B8%AD%E5%B0%87%E6%B9%AF.png</div>
+                    <div class="item-image-text">中將湯</div>
+                </div>
+
+                <div class="ad-item" data-category="藥品">
+                    <div class="item-date">(大正12) 1923-04-13</div>
+                    <div class="item-edition">日刊</div>
+                    <div class="item-page">06</div>
+                    <div class="item-category">藥品</div>
+                    <div class="item-tag"></div>
+                    <div class="item-title">健腦丸</div>
+                    <div class="item-content">
+                        想變聰明可以靠吃藥？！
+                    </div>
+                    <div class="item-keywords"></div>
+                    <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E5%A4%A7%E6%AD%A312%29%201923-04-13_%E5%81%A5%E8%85%A6%E4%B8%B8.png</div>
+                    <div class="item-image-text">健腦丸</div>
+                </div>
+
+                <div class="ad-item" data-category="藥品">
+                    <div class="item-date">(大正9) 1920-12-25</div>
+                    <div class="item-edition">日刊</div>
+                    <div class="item-page">01</div>
+                    <div class="item-category">藥品</div>
+                    <div class="item-tag"></div>
+                    <div class="item-title">表飛鳴</div>
+                    <div class="item-content">
+                        不只整腸，表飛鳴也能治皮膚病、抗衰老？！
+                    </div>
+                    <div class="item-keywords"></div>
+                    <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E5%A4%A7%E6%AD%A39%29%201920-12-25_%E8%A1%A8%E9%A3%9B%E9%B3%B4.png</div>
+                    <div class="item-image-text">表飛鳴</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 重要建設 -->
+        <section id="constructions" class="section">
+            <div class="section-header">
+                <h2 class="section-title">重要建設</h2>
+            </div>
+            
+            <!-- 建設插圖 -->
+            <div class="illustration-container">
+                <div class="illustration-placeholder inline-illustration" data-illustration="construction-timeline">
+                    <div class="illustration-text">
+                        <p>見證臺灣現代化的足跡</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="construction-filters">
+                <button class="filter-btn active" data-category="all">所有報導</button>
+                <button class="filter-btn" data-category="水利建設">水利建設</button>
+                <button class="filter-btn" data-category="交通建設">交通建設</button>
+                <button class="filter-btn" data-category="教育建設">教育建設</button>
+            </div>
+            
+            <div id="constructions-timeline">
+                <div class="loading">載入中...</div>
+            </div>
+            
+            <div class="data-hidden">
+                <div class="construction-item" data-category="水利建設" data-year="1918">
+                    <div class="item-year">1918</div>
+                    <div class="item-date">(大正7) 1918-01-31</div>
+                    <div class="item-edition">日刊</div>
+                    <div class="item-page">05</div>
+                    <div class="item-category">水利建設</div>
+                    <div class="item-tag">日月潭水力發電</div>
+                    <div class="item-title">水力電氣計畫</div>
+                    <div class="item-content">
+                        日月潭水力發電若供應製糖業，效益可觀，依不同電價推算，25至30年可回本，甚至有高額利潤。雖理想上應由地方自治體經營，但在台灣較適合由政府主導，以低價穩定供電。
+                    </div>
+                    <div class="item-keywords">日月潭、早稻田大學教授、製糖會社</div>
+                    <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E5%A4%A7%E6%AD%A37%29%201918-01-31_%E6%B0%B4%E5%8A%9B%E9%9B%BB%E6%B0%A3%E8%A8%88%E7%95%AB.png</div>
+                    <div class="item-image-text">水力電氣計畫</div>
+                </div>
+
+                <div class="construction-item" data-category="水利建設" data-year="1934">
+                    <div class="item-year">1934</div>
+                    <div class="item-date">(昭和9) 1934-07-31</div>
+                    <div class="item-edition">日刊</div>
+                    <div class="item-page">05</div>
+                    <div class="item-category">水利建設</div>
+                    <div class="item-tag">日月潭水力發電</div>
+                    <div class="item-title">150,000K.Vの高壓で　全島へ流れろ　待望の日月潭水力發電　南北幹線にスキツチ入る</div>
+                    <div class="item-content">
+                        日月潭水力發電於30日正式啟用，透過15萬伏特高壓送電線，順利將電力輸送至台北、高雄、霧峰、嘉義等主要變電所，實現全台供電。
+                    </div>
+                    <div class="item-keywords"></div>
+                    <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%AD%E5%92%8C9%29%201934-07-31_150%2C000K.V%E3%81%AE%E9%AB%98%E5%A3%93%E3%81%A7%E3%80%80%E5%85%A8%E5%B3%B6%E3%81%B8%E6%B5%81%E3%82%8C%E3%82%8D%E3%80%80%E5%BE%85%E6%9C%9B%E3%81%AE%E6%97%A5%E6%9C%88%E6%BD%AD%E6%B0%B4%E5%8A%9B%E7%99%BC%E9%9B%BB%E3%80%80%E5%8D%97%E5%8C%97%E5%B9%B9%E7%B7%9A%E3%81%AB%E3%82%B9%E3%82%AD%E3%83%84%E3%83%81%E5%85%A5%E3%82%8B.png</div>
+                    <div class="item-image-text">150,000K.Vの高壓で　全島へ流れろ　待望の日月潭水力發電　南北幹線にスキツチ入る</div>
+                </div>
+
+                <div class="construction-item" data-category="水利建設" data-year="1934">
+                    <div class="item-year">1934</div>
+                    <div class="item-date">(昭和9) 1934-05-01</div>
+                    <div class="item-edition">日刊</div>
+                    <div class="item-page">14</div>
+                    <div class="item-category">水利建設</div>
+                    <div class="item-tag">嘉南大圳</div>
+                    <div class="item-title">自然の征服者　嘉南大圳事業　郡下に於る其の效果</div>
+                    <div class="item-content">
+                        嘉南大圳灌溉區覆蓋新化、新市、善化、安定等地，改善近萬甲原本缺水或排水不良的土地，顯著提升利用價值與農作物產量。<br><br>
+                        原為魚塭的低產地亦轉為高效耕地。安定庄曾創蓬萊米高產紀錄，甘蔗灌溉亦成效卓著。通水四年來，三年輪作制度推行順利，農業成長超出預期。
+                    </div>
+                    <div class="item-keywords">新化街、善化庄、安定庄</div>
+                    <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%AD%E5%92%8C9%29%201934-05-01_%E8%87%AA%E7%84%B6%E3%81%AE%E5%BE%81%E6%9C%8D%E8%80%85%E3%80%80%E5%98%89%E5%8D%97%E5%A4%A7%E5%9C%B3%E4%BA%8B%E6%A5%AD%E3%80%80%E9%83%A1%E4%B8%8B%E3%81%AB%E6%96%BC%E3%82%8B%E5%85%B6%E3%81%AE%E6%95%88%E6%9E%9C.png</div>
+                    <div class="item-image-text">自然の征服者　嘉南大圳事業　郡下に於る其の效果</div>
+                </div>
+
+                <div class="construction-item" data-category="交通建設" data-year="1908">
+                    <div class="item-year">1908</div>
+                    <div class="item-date">(明治41) 1908-03-31</div>
+                    <div class="item-edition">日刊</div>
+                    <div class="item-page">03</div>
+                    <div class="item-category">交通建設</div>
+                    <div class="item-tag">縱貫線</div>
+                    <div class="item-title">鐵道開通式及百斯篤</div>
+                    <div class="item-content">
+                        為迎接即將在台中舉行的鐵道開通典禮，各地加強防治鼠疫。當局特別關注葫蘆墩疫區，並呼籲台北、新竹、嘉義等地預作防疫準備。嘉義樸仔腳疫情雖嚴重，已積極撲滅，預期可望改善。
+                    </div>
+                    <div class="item-keywords"></div>
+                    <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%8E%E6%B2%BB41%29%201908-03-31_%E9%90%B5%E9%81%93%E9%96%8B%E9%80%9A%E5%BC%8F%E5%8F%8A%E7%99%BE%E6%96%AF%E7%AF%A4.png</div>
+                    <div class="item-image-text">鐵道開通式及百斯篤</div>
+                </div>
+
+                <div class="construction-item" data-category="交通建設" data-year="1910">
+                    <div class="item-year">1910</div>
+                    <div class="item-date">(明治43) 1910-10-14</div>
+                    <div class="item-edition">日刊</div>
+                    <div class="item-page">02</div>
+                    <div class="item-category">交通建設</div>
+                    <div class="item-tag">無線電</div>
+                    <div class="item-title">富基角無線電信局</div>
+                    <div class="item-content">
+                        富基角無線電信支局近日啟用，設於富基角燈塔旁，工程總費用約為二萬七千圓，設有高達230尺的電柱，通訊範圍約四百海里，覆蓋台灣海峽。<br><br>
+                        未來船舶可直接透過該局通訊，無需再經香港或大瀨崎轉送，節省時間與費用，提升台灣對外通信效率。
+                    </div>
+                    <div class="item-keywords"></div>
+                    <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%8E%E6%B2%BB43%29%201910-10-14_%E5%AF%8C%E5%9F%BA%E8%A7%92%E7%84%A1%E7%B7%9A%E9%9B%BB%E4%BF%A1%E5%B1%80.png</div>
+                    <div class="item-image-text">富基角無線電信局</div>
+                </div>
+
+                <div class="construction-item" data-category="教育建設" data-year="1900">
+                    <div class="item-year">1900</div>
+                    <div class="item-date">(明治33) 1900-02-17</div>
+                    <div class="item-edition">日刊</div>
+                    <div class="item-page">02</div>
+                    <div class="item-category">教育建設</div>
+                    <div class="item-tag">初等教育</div>
+                    <div class="item-title">八芝蘭の女子敎育</div>
+                    <div class="item-content">
+                        士林的國語學校第三附屬學校為台灣女子教育的重要據點，於本月15日舉行首屆畢業典禮，手藝科12人畢業，其中7人已獲聘為教師。<br><br>
+                        該校自1897年創立，1898年升格為附屬學校後學生人數穩定成長，目前共有109名學生，分為本科與手藝科。此次僅手藝科畢業，預計三年後才會有首屆本科生畢業。<br><br>
+                        此校的發展顯示女子教育在台灣逐漸受到重視，具備正面社會與教育意義。
+                    </div>
+                    <div class="item-keywords">士林、國語學校第三附屬學校、卒業證書授與式、手藝科</div>
+                    <div class="item-image-url"></div>
+                    <div class="item-image-text">八芝蘭の女子敎育</div>
+                </div>
+
+                <div class="construction-item" data-category="教育建設" data-year="1928">
+                    <div class="item-year">1928</div>
+                    <div class="item-date">(昭和3) 1928-05-01</div>
+                    <div class="item-edition">夕刊</div>
+                    <div class="item-page">n04</div>
+                    <div class="item-category">教育建設</div>
+                    <div class="item-tag">高等教育</div>
+                    <div class="item-title">臺北帝大　開校式　本島人入學三名</div>
+                    <div class="item-content">
+                        臺北帝國大學於30日舉行開校典禮，首屆入學本島人僅3名，另有1人錄取內地九州大學經濟科，顯示本島人入學比例極低。
+                    </div>
+                    <div class="item-keywords"></div>
+                    <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%AD%E5%92%8C3%29%201928-05-01_%E8%87%BA%E5%8C%97%E5%B8%9D%E5%A4%A7%E3%80%80%E9%96%8B%E6%A0%A1%E5%BC%8F%E3%80%80%E6%9C%AC%E5%B3%B6%E4%BA%BA%E5%85%A5%E5%AD%B8%E4%B8%89%E5%90%8D.png</div>
+                    <div class="item-image-text">臺北帝大　開校式　本島人入學三名</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 生活萬象 -->
+        <section id="daily-life" class="section">
+            <div class="section-header">
+                <h2 class="section-title">生活萬象</h2>
+                <button class="view-all-btn" onclick="openModal('daily-life')">more</button>
+            </div>
+            
+            <div id="daily-life-items">
+                <div class="loading">載入中...</div>
+            </div>
+            
+            <div class="data-hidden">
+                <div class="daily-life-item" data-category="經濟">
+                    <div class="item-date">(明治43) 1910-06-23</div>
+                    <div class="item-edition">日刊</div>
+                    <div class="item-page">03</div>
+                    <div class="item-category">經濟</div>
+                    <div class="item-tag">期貨</div>
+                    <div class="item-title">堂島期米市價</div>
+                    <div class="item-content">
+                        堂島米市場期貨價格波動情況，反映當時經濟狀況與農產品交易概況。
+                    </div>
+                    <div class="item-keywords"></div>
+                    <div class="item-image-url"></div>
+                    <div class="item-image-text">堂島期米市價</div>
+                </div>
+
+                <div class="daily-life-item" data-category="經濟">
+                    <div class="item-date">(明治33) 1900-03-21</div>
+                    <div class="item-edition">日刊</div>
+                    <div class="item-page">02</div>
+                    <div class="item-category">經濟</div>
+                    <div class="item-tag">物價</div>
+                    <div class="item-title">台南縣と內地の物價比較</div>
+                    <div class="item-content">
+                        調查顯示，台南物價多數與日本內地相近，部分如白米、罐頭、布料、雞蛋與魚類等甚至更便宜。<br><br>
+                        原因在於舊年大量貨物滯留倉庫，商家為償還貸款而低價出售，造成物價低於正常水準，形成台南生活成本低於東京、大阪的現象。
+                    </div>
+                    <div class="item-keywords"></div>
+                    <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%8E%E6%B2%BB33%29%201900-03-21_%E5%8F%B0%E5%8D%97%E7%B8%A3%E3%81%A8%E5%85%A7%E5%9C%B0%E3%81%AE%E7%89%A9%E5%83%B9%E6%AF%94%E8%BC%83.png</div>
+                    <div class="item-image-text">台南縣と內地の物價比較</div>
+                </div>
+
+                <div class="daily-life-item" data-category="交通">
+                    <div class="item-date">(明治42) 1909-01-09</div>
+                    <div class="item-edition">日刊</div>
+                    <div class="item-page">06</div>
+                    <div class="item-category">交通</div>
+                    <div class="item-tag">船運</div>
+                    <div class="item-title">輪船停靠點與時刻表</div>
+                    <div class="item-content">
+                        各航線輪船停靠港口與班次時刻表，提供民眾交通資訊。
+                    </div>
+                    <div class="item-keywords"></div>
+                    <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%8E%E6%B2%BB42%29%201909-01-09_%E5%BB%A3%E5%91%8A_%E6%BC%A2%E6%96%87.png</div>
+                    <div class="item-image-text">輪船停靠點與時刻表</div>
+                </div>
+
+                <div class="daily-life-item" data-category="天氣">
+                    <div class="item-date">(昭和7) 1932-05-14</div>
+                    <div class="item-edition">夕刊</div>
+                    <div class="item-page">n02</div>
+                    <div class="item-category">天氣</div>
+                    <div class="item-tag"></div>
+                    <div class="item-title">氣味惡く涼しい！　七九度七分　ニの頃の氣狂ひ天氣</div>
+                    <div class="item-content">
+                        13日台北出現異常涼爽天氣，氣溫僅26.5度，因高壓區東移帶來冷風，與降雨無關。氣象台預測未來一兩日將轉為炎熱，短期內天氣穩定，僅提醒高壓離境後可能出現低壓。
+                    </div>
+                    <div class="item-keywords">臺北測候所</div>
+                    <div class="item-image-url">https://raw.githubusercontent.com/wendytsai1999/demo-images/main/%28%E6%98%AD%E5%92%8C7%29%201932-05-14_%E6%B0%A3%E5%91%B3%E6%83%A1%E3%81%8F%E6%B6%BC%E3%81%97%E3%81%84%EF%BC%81%E3%80%80%E4%B8%83%E4%B9%9D%E5%BA%A6%E4%B8%83%E5%88%86%E3%80%80%E3%83%8B%E3%81%AE%E9%A0%83%E3%81%AE%E6%B0%A3%E7%8B%82%E3%81%B2%E5%A4%A9%E6%B0%A3.png</div>
+                    <div class="item-image-text">氣味惡く涼しい！　七九度七分　ニの頃の氣狂ひ天氣</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 結尾插圖 -->
+        <section class="illustration-section ending-illustration">
+            <div class="illustration-container">
+                <div class="illustration-placeholder" data-illustration="historical-scene">
+                    <div class="illustration-text">
+                        <h3>時光荏苒</h3>
+                        <p>每一頁報紙都是歷史的見證</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 回到頂部按鈕 -->
+    <button id="back-to-top" class="back-to-top">▲</button>
+
+    <!-- 彈出視窗 -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">查看全部</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-filters" id="modal-filters"></div>
+                <div class="modal-items" id="modal-items"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 圖片放大視窗 -->
+    <div class="image-modal-overlay" id="image-modal-overlay">
+        <div class="image-modal">
+            <button class="image-modal-close" onclick="closeImageModal()">&times;</button>
+            <img id="image-modal-img" src="" alt="">
+            <div class="image-modal-caption" id="image-modal-caption"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
