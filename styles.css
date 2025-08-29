@@ -79,13 +79,15 @@ body {
     position: absolute;
     width: 400%;
     height: 50%;
-    background-image: url('https://storage.googleapis.com/studio-design-asset-files/projects/8dO8GRk5Wn/s-300x46_489b6636-aa85-48b2-b70f-c5152024322b.svg');
+    background-image: url('https://raw.githubusercontent.com/wendytsai1999/demo-images/main/banner.svg');
     background-repeat: repeat-x;
     background-size: contain;
     background-position: center;
     animation: scrollBg 60s linear infinite;
     z-index: 1;
     filter: grayscale(100%) brightness(0.7);
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
 }
 
 .banner-overlay {
@@ -128,7 +130,7 @@ body {
 
 .character img {
     height: 280px;
-    filter: grayscale(100%) brightness(0.8);
+    filter: brightness(1.1) contrast(1.1);
 }
 
 /* === 浮動導航按鈕 === */
@@ -680,6 +682,46 @@ body {
 .ending-illustration .illustration-placeholder::before {
     content: '⏰';
     color: rgba(255,255,255,0.3);
+}
+
+/* historical-scene 插圖樣式 */
+[data-illustration="historical-scene"] {
+    width: 100%;
+    height: 180px;
+    background-image: url('https://raw.githubusercontent.com/wendytsai1999/demo-images/main/footer.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-illustration="historical-scene"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    pointer-events: none;
+}
+
+[data-illustration="historical-scene"]:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    border-color: #999;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+[data-illustration="historical-scene"]:hover::before {
+    background: rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
 }
 
 .illustration-text {
@@ -1353,23 +1395,28 @@ body {
     }
     
     /* 插圖區段手機版優化 */
-    .illustration-placeholder {
-        height: auto !important;
+    .illustration-container .illustration-placeholder:not([data-illustration]) {
+        height: auto;
         min-height: 120px;
         padding: 1rem;
     }
     
-    .main-illustration .illustration-placeholder,
-    .ending-illustration .illustration-placeholder {
-        height: 150px !important;
+    /* 確保 construction-timeline 在手機版保持動畫效果 */
+    .illustration-container [data-illustration="construction-timeline"] {
+        height: 150px;
     }
     
-    .small-illustration {
+    .illustration-container .main-illustration .illustration-placeholder,
+    .illustration-container .ending-illustration .illustration-placeholder {
+        height: 150px;
+    }
+    
+    .illustration-container .small-illustration {
         width: 90%;
         height: 100px;
     }
     
-    .inline-illustration {
+    .illustration-container .inline-illustration {
         width: 95%;
         height: 120px;
     }
@@ -1449,3 +1496,108 @@ body {
 以下區域專門用於後續樣式調整，不會被其他樣式覆蓋
 可以透過修改CSS變數或直接在此區域添加樣式來調整外觀
 */
+
+/* newspaper-stack 區塊樣式 */
+[data-illustration="newspaper-stack"] {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 4rem;
+    padding: 2.5rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* newspaper-stack hover 效果 */
+[data-illustration="newspaper-stack"]:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    border-color: #999;
+}
+
+/* newspaper-stack hover 時停止動畫 */
+[data-illustration="newspaper-stack"]:hover::before {
+    animation-play-state: paused;
+}
+
+/* newspaper-stack 動畫元素 - 使用 transform 避免卡頓 */
+[data-illustration="newspaper-stack"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-image: url('https://raw.githubusercontent.com/wendytsai1999/demo-images/main/廣告.svg');
+    background-size: contain;
+    background-repeat: repeat-x;
+    background-position: center;
+    animation: scrollNewspaper 30s linear infinite;
+    z-index: 0;
+}
+
+@keyframes scrollAd {
+    0% { background-position: 0% center; }
+    100% { background-position: -25% center; }
+}
+
+/* newspaper-stack 專用動畫 - 使用 transform 避免卡頓 */
+@keyframes scrollNewspaper {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-25%); }
+}
+
+/* construction-timeline 區塊樣式 */
+.illustration-container [data-illustration="construction-timeline"] {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 4rem;
+    padding: 2.5rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* construction-timeline hover 效果 */
+.illustration-container [data-illustration="construction-timeline"]:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    border-color: #999;
+}
+
+/* construction-timeline hover 時停止動畫 */
+.illustration-container [data-illustration="construction-timeline"]:hover::before {
+    animation-play-state: paused;
+}
+ 
+/* 強制確保動畫運作 
+.illustration-container [data-illustration="construction-timeline"] {
+    animation: scrollAd 20s linear infinite;
+    animation-play-state: running;
+} */
+
+/* construction-timeline 動畫元素 - 使用 transform 避免卡頓 */
+.illustration-container [data-illustration="construction-timeline"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-image: url('https://raw.githubusercontent.com/wendytsai1999/demo-images/main/重要建設.svg');
+    background-size: contain;
+    background-repeat: repeat-x;
+    background-position: center;
+    animation: scrollNewspaper 30s linear infinite;
+    z-index: 0;
+}
